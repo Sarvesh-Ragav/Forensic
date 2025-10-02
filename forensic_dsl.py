@@ -219,13 +219,23 @@ def validate_field_for_dataset(dataset: DatasetType, field: str) -> bool:
 
 def dsl_to_sql(dsl: Union[Dict[str, Any], ForensicQuery]) -> str:
     """
-    Convert DSL query to safe SQL string.
+    Enhanced DSL to SQL compiler with improved country code detection and security.
+    
+    Rules:
+    - dataset maps directly to table name (messages, calls, contacts, entities)
+    - filters map to WHERE clauses with proper parameterization
+    - '=' and '!=' → normal equality
+    - 'contains' → LIKE '%value%'
+    - 'regex' → REGEXP (database-specific)
+    - '>' and '<' → numeric comparison
+    - 'between' → value is [low, high], maps to BETWEEN
+    - 'country' → detect by prefix (+971 → UAE, +44 → UK). Use LIKE filter
     
     Args:
         dsl: DSL query as dict or ForensicQuery object
         
     Returns:
-        str: Generated SQL query
+        str: Safe parameterized SQL query
     """
     if isinstance(dsl, dict):
         query = ForensicQuery(**dsl)
@@ -236,12 +246,11 @@ def dsl_to_sql(dsl: Union[Dict[str, Any], ForensicQuery]) -> str:
     if query.dataset not in FIELD_MAPPINGS:
         raise ValueError(f"Invalid dataset: {query.dataset}")
     
-    # Build SELECT clause
+    # Build SELECT clause - dataset maps directly to table name
     select_clause = f"SELECT * FROM {query.dataset.value}"
     
-    # Build WHERE clause
+    # Build WHERE clause with enhanced parameter handling
     where_conditions = []
-    params = []
     param_counter = 0
     
     for filter_cond in query.filters:
@@ -252,59 +261,55 @@ def dsl_to_sql(dsl: Union[Dict[str, Any], ForensicQuery]) -> str:
         param_counter += 1
         param_name = f"param_{param_counter}"
         
+        # Handle each operator according to the rules
         if filter_cond.op == FilterOperator.EQUALS:
+            # '=' → normal equality
             where_conditions.append(f"{filter_cond.field} = :{param_name}")
-            params.append((param_name, filter_cond.value))
             
         elif filter_cond.op == FilterOperator.NOT_EQUALS:
+            # '!=' → normal inequality
             where_conditions.append(f"{filter_cond.field} != :{param_name}")
-            params.append((param_name, filter_cond.value))
             
         elif filter_cond.op == FilterOperator.CONTAINS:
+            # 'contains' → LIKE '%value%'
             where_conditions.append(f"{filter_cond.field} LIKE :{param_name}")
-            params.append((param_name, f"%{filter_cond.value}%"))
+            # Note: The % wrapping will be handled in parameter binding
             
         elif filter_cond.op == FilterOperator.REGEX:
-            # Note: SQLite doesn't support regex natively, this would need custom function
+            # 'regex' → REGEXP (database-specific implementation)
+            # For SQLite, this requires a custom REGEXP function
             where_conditions.append(f"REGEXP(:{param_name}, {filter_cond.field})")
-            params.append((param_name, filter_cond.value))
             
         elif filter_cond.op == FilterOperator.GREATER_THAN:
+            # '>' → numeric comparison
             where_conditions.append(f"{filter_cond.field} > :{param_name}")
-            params.append((param_name, filter_cond.value))
             
         elif filter_cond.op == FilterOperator.LESS_THAN:
+            # '<' → numeric comparison
             where_conditions.append(f"{filter_cond.field} < :{param_name}")
-            params.append((param_name, filter_cond.value))
             
         elif filter_cond.op == FilterOperator.GREATER_EQUAL:
             where_conditions.append(f"{filter_cond.field} >= :{param_name}")
-            params.append((param_name, filter_cond.value))
             
         elif filter_cond.op == FilterOperator.LESS_EQUAL:
             where_conditions.append(f"{filter_cond.field} <= :{param_name}")
-            params.append((param_name, filter_cond.value))
             
         elif filter_cond.op == FilterOperator.BETWEEN:
-            if len(filter_cond.value) != 2:
-                raise ValueError("BETWEEN operator requires exactly 2 values")
+            # 'between' → value is [low, high], maps to BETWEEN
+            if not isinstance(filter_cond.value, list) or len(filter_cond.value) != 2:
+                raise ValueError("BETWEEN operator requires exactly 2 values [low, high]")
             where_conditions.append(f"{filter_cond.field} BETWEEN :{param_name}_1 AND :{param_name}_2")
-            params.append((f"{param_name}_1", filter_cond.value[0]))
-            params.append((f"{param_name}_2", filter_cond.value[1]))
             
         elif filter_cond.op == FilterOperator.IN:
             placeholders = ", ".join([f":{param_name}_{i}" for i in range(len(filter_cond.value))])
             where_conditions.append(f"{filter_cond.field} IN ({placeholders})")
-            for i, val in enumerate(filter_cond.value):
-                params.append((f"{param_name}_{i}", val))
-                
+            
         elif filter_cond.op == FilterOperator.NOT_IN:
             placeholders = ", ".join([f":{param_name}_{i}" for i in range(len(filter_cond.value))])
             where_conditions.append(f"{filter_cond.field} NOT IN ({placeholders})")
-            for i, val in enumerate(filter_cond.value):
-                params.append((f"{param_name}_{i}", val))
-                
+            
         elif filter_cond.op == FilterOperator.COUNTRY:
+            # 'country' → detect by prefix (+971 → UAE, +44 → UK). Use LIKE filter
             country_codes = COUNTRY_CODES.get(filter_cond.value.upper(), [])
             if not country_codes:
                 raise ValueError(f"Unknown country: {filter_cond.value}")
@@ -314,12 +319,12 @@ def dsl_to_sql(dsl: Union[Dict[str, Any], ForensicQuery]) -> str:
             if filter_cond.field not in phone_fields:
                 raise ValueError(f"Country filter can only be applied to phone number fields: {phone_fields}")
             
+            # Build country conditions with LIKE filters
             country_conditions = []
             for code in country_codes:
                 param_counter += 1
                 country_param = f"param_{param_counter}"
                 country_conditions.append(f"{filter_cond.field} LIKE :{country_param}")
-                params.append((country_param, f"{code}%"))
             
             where_conditions.append(f"({' OR '.join(country_conditions)})")
             
@@ -334,7 +339,7 @@ def dsl_to_sql(dsl: Union[Dict[str, Any], ForensicQuery]) -> str:
     if where_conditions:
         where_clause = f" WHERE {' AND '.join(where_conditions)}"
     
-    # Build ORDER BY clause
+    # Build ORDER BY clause - if sort exists, add ORDER BY
     order_clause = ""
     if query.sort:
         sort_parts = []
@@ -344,15 +349,131 @@ def dsl_to_sql(dsl: Union[Dict[str, Any], ForensicQuery]) -> str:
             sort_parts.append(f"{sort_cond.field} {sort_cond.direction.value.upper()}")
         order_clause = f" ORDER BY {', '.join(sort_parts)}"
     
-    # Build LIMIT clause
+    # Build LIMIT clause - if limit exists, add LIMIT
     limit_clause = ""
     if query.limit:
         limit_clause = f" LIMIT {query.limit}"
     
-    # Combine all clauses
+    # Combine all clauses into safe SQL string
     sql = f"{select_clause}{where_clause}{order_clause}{limit_clause}"
     
     return sql
+
+
+def get_sql_parameters(dsl: Union[Dict[str, Any], ForensicQuery]) -> Dict[str, Any]:
+    """
+    Extract parameters for the SQL query generated by dsl_to_sql.
+    
+    Args:
+        dsl: DSL query as dict or ForensicQuery object
+        
+    Returns:
+        Dict[str, Any]: Parameter dictionary for SQL execution
+    """
+    if isinstance(dsl, dict):
+        query = ForensicQuery(**dsl)
+    else:
+        query = dsl
+    
+    params = {}
+    param_counter = 0
+    
+    for filter_cond in query.filters:
+        param_counter += 1
+        param_name = f"param_{param_counter}"
+        
+        if filter_cond.op == FilterOperator.CONTAINS:
+            # Wrap contains values with % for LIKE
+            params[param_name] = f"%{filter_cond.value}%"
+            
+        elif filter_cond.op == FilterOperator.BETWEEN:
+            # Handle BETWEEN with two parameters
+            params[f"{param_name}_1"] = filter_cond.value[0]
+            params[f"{param_name}_2"] = filter_cond.value[1]
+            
+        elif filter_cond.op == FilterOperator.IN or filter_cond.op == FilterOperator.NOT_IN:
+            # Handle IN/NOT IN with multiple parameters
+            for i, val in enumerate(filter_cond.value):
+                params[f"{param_name}_{i}"] = val
+                
+        elif filter_cond.op == FilterOperator.COUNTRY:
+            # Handle country codes with LIKE patterns
+            country_codes = COUNTRY_CODES.get(filter_cond.value.upper(), [])
+            for code in country_codes:
+                param_counter += 1
+                country_param = f"param_{param_counter}"
+                params[country_param] = f"{code}%"
+                
+        elif filter_cond.op in [FilterOperator.IS_NULL, FilterOperator.IS_NOT_NULL]:
+            # No parameters needed for NULL checks
+            continue
+            
+        else:
+            # Standard parameter handling
+            params[param_name] = filter_cond.value
+    
+    return params
+
+
+def run_dsl_query(dsl: Dict[str, Any], session) -> List[Dict[str, Any]]:
+    """
+    Execute a DSL query using SQLAlchemy session and return results as list of dicts.
+    
+    Steps:
+    1. Validate DSL with Pydantic
+    2. Compile DSL to SQL using dsl_to_sql
+    3. Execute query with SQLAlchemy session.execute()
+    4. Return results as list of dicts
+    
+    Args:
+        dsl: DSL query as dictionary
+        session: SQLAlchemy session object
+        
+    Returns:
+        List[Dict[str, Any]]: Query results as list of dictionaries
+        
+    Raises:
+        ValueError: If DSL validation fails
+        Exception: If SQL execution fails
+    """
+    from sqlalchemy import text
+    
+    try:
+        # Step 1: Validate DSL with Pydantic
+        validated_query = validate_dsl_query(dsl)
+        
+        # Step 2: Compile DSL to SQL using dsl_to_sql
+        sql = dsl_to_sql(validated_query)
+        
+        # Step 3: Get parameters for the query
+        params = get_sql_parameters(validated_query)
+        
+        # Step 4: Execute query with SQLAlchemy session.execute()
+        # Use text() to create a proper SQLAlchemy text object
+        result = session.execute(text(sql), params)
+        
+        # Step 5: Convert results to list of dictionaries
+        columns = result.keys()
+        rows = result.fetchall()
+        
+        # Convert each row to a dictionary
+        results = []
+        for row in rows:
+            row_dict = {}
+            for i, column in enumerate(columns):
+                value = row[i]
+                # Handle datetime objects by converting to ISO format
+                if hasattr(value, 'isoformat'):
+                    row_dict[column] = value.isoformat()
+                else:
+                    row_dict[column] = value
+            results.append(row_dict)
+        
+        return results
+        
+    except Exception as e:
+        # Re-raise with more context
+        raise Exception(f"DSL query execution failed: {str(e)}") from e
 
 
 def validate_dsl_query(dsl: Union[Dict[str, Any], str]) -> ForensicQuery:
