@@ -1,0 +1,6 @@
+MessageID,SenderNumber,ReceiverNumber,App,Timestamp,MessageText
+1,+1234567890,+1987654321,WhatsApp,2024-01-15 10:30:00,"Hey, are we still meeting for lunch tomorrow?"
+2,+971501234567,+1234567890,Telegram,2024-01-15 14:15:00,Payment received. Send 0.5 BTC to: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
+3,+1234567890,+971509876543,Signal,2024-01-15 22:30:00,Transaction confirmed. New address: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
+4,+1987654321,+1234567890,WhatsApp,2024-01-16 09:45:00,Thanks for the coffee! Let's do it again soon.
+5,+1555123456,+1234567890,WhatsApp,2024-01-16 16:20:00,Can you send me the project files when you get a chance?
