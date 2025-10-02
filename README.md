@@ -16,6 +16,7 @@ This repository contains SQLAlchemy ORM models and utilities for forensic data a
 ### Core Tables
 
 1. **Messages Table**
+
    - `id`: Primary Key
    - `sender`: Sender identifier/phone number
    - `receiver`: Receiver identifier/phone number
@@ -24,6 +25,7 @@ This repository contains SQLAlchemy ORM models and utilities for forensic data a
    - `text`: Message content
 
 2. **Calls Table**
+
    - `id`: Primary Key
    - `caller`: Caller identifier/phone number
    - `callee`: Callee identifier/phone number
@@ -32,6 +34,7 @@ This repository contains SQLAlchemy ORM models and utilities for forensic data a
    - `type`: Call type (incoming/outgoing/missed)
 
 3. **Contacts Table**
+
    - `id`: Primary Key
    - `name`: Contact name
    - `number`: Phone number
@@ -56,18 +59,21 @@ This repository contains SQLAlchemy ORM models and utilities for forensic data a
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/Sarvesh-Ragav/Forensic.git
 cd Forensic
 ```
 
 2. Create a virtual environment:
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
