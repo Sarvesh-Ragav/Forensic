@@ -1,5 +1,53 @@
-EntityID,Type,Value,Label
-1,bitcoin,1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2,0.98
-2,foreign_number,+971501234567,1.0
-3,bitcoin,bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh,0.95
-4,email,ahmed.rashid@protonmail.com,1.0
+EntityID,Type,Value,Label,Notes
+E001,Bitcoin,3a1JyiNbUnAvwSWJfdjMPqPEBqUhArQ,suspicious,BTC address
+E002,Bitcoin,3PcyLasnipuaUkxRFZXe1cb51JJRzhbuXM,suspicious,BTC address
+E003,Bitcoin,3BgBye1UnWeNGmWv7OjgpkjVe6M,suspicious,BTC address
+E004,Bitcoin,3VB5INM1MjeBsrdFtCdZe11MFCIX3BYOtDj,suspicious,BTC address
+E005,Bitcoin,1g3vSFkpBBGjxrzuLWOefQrSO42uKiv7R,suspicious,BTC address
+E006,Bitcoin,3K6txXYPZTQGOAwwln6Eoie0gVZ2,suspicious,BTC address
+E007,Bitcoin,12MLjlQM3ScwS8LUWoo7W4mQJBVWFzk,suspicious,BTC address
+E008,Bitcoin,1ipN2Ig00rVq4jB6nBvbdFo9xb50OXirZRi,suspicious,BTC address
+E009,Bitcoin,3M4bnj6LAWohoNMdZEHNJSsavJlPGw7HW,suspicious,BTC address
+E010,Bitcoin,12cxxUweoOgKUivuNZQ8DliS6cmX2tty,suspicious,BTC address
+E011,Ethereum,0xd70a4d0a4c667f52b5c4166f241547b277be96ac,suspicious,ETH address
+E012,Ethereum,0x0a68b20da723a5f0275712554f028e1cb39bf321,suspicious,ETH address
+E013,Ethereum,0x2bfcffab8442bb253fc37597f2e16b7669251782,suspicious,ETH address
+E014,Ethereum,0xd89c28dd842e3f8413f4a91a9929e5e0d1fc4399,suspicious,ETH address
+E015,Ethereum,0x0e8a43c67b26752d5f56c8131720fd6fedeb32f7,suspicious,ETH address
+E016,Ethereum,0xe716739049da401245600854678d99215f852960,suspicious,ETH address
+E017,Ethereum,0x0bc82e2e569d98879705164eda94af93078bc6d3,suspicious,ETH address
+E018,Ethereum,0x9b37663897dbb88f76f788adac47f44ffcbb778e,suspicious,ETH address
+E019,Ethereum,0xb498e65c20f1eab3d4841b30e33157a2ff2ae7ac,suspicious,ETH address
+E020,Ethereum,0x440ca3bd0e6de0dc2bd4049e57a8e284c5bab054,suspicious,ETH address
+E021,Foreign Phone,+49329668516,benign,Foreign phone example
+E022,Foreign Phone,+49122753046,benign,Foreign phone example
+E023,Foreign Phone,+447454990453,benign,Foreign phone example
+E024,Foreign Phone,+971174268414,benign,Foreign phone example
+E025,Foreign Phone,+19332727956,benign,Foreign phone example
+E026,Foreign Phone,+49878339187,benign,Foreign phone example
+E027,Foreign Phone,+61519108839,benign,Foreign phone example
+E028,Foreign Phone,+61225871397,benign,Foreign phone example
+E029,Foreign Phone,+971870728679,benign,Foreign phone example
+E030,Foreign Phone,+971874064039,benign,Foreign phone example
+E031,Foreign Phone,+971065180170,benign,Foreign phone example
+E032,Foreign Phone,+16226567661,benign,Foreign phone example
+E033,Suspicious Email,85e4e9oe94@protonmail.com,suspicious,privacy-focused/suspicious domain
+E034,Suspicious Email,qzpniqf@suspicious.ru,suspicious,privacy-focused/suspicious domain
+E035,Suspicious Email,1bxw76icvq@safe-mail.net,suspicious,privacy-focused/suspicious domain
+E036,Suspicious Email,5ibpt11f9i@safe-mail.net,suspicious,privacy-focused/suspicious domain
+E037,Suspicious Email,lvylkfxhk@protonmail.com,suspicious,privacy-focused/suspicious domain
+E038,Suspicious Email,856wpr97y@darkmail.pro,suspicious,privacy-focused/suspicious domain
+E039,Suspicious Email,zokgtii@safe-mail.net,suspicious,privacy-focused/suspicious domain
+E040,Suspicious Email,36u8ue@suspicious.ru,suspicious,privacy-focused/suspicious domain
+E041,Suspicious Email,hx74d0g@anonymous.pro,suspicious,privacy-focused/suspicious domain
+E042,Suspicious Email,yv5g10ur@anonymous.pro,suspicious,privacy-focused/suspicious domain
+E043,Suspicious Email,8a78e9r@suspicious.ru,suspicious,privacy-focused/suspicious domain
+E044,Suspicious Email,vh6t1ntmjs@privacymail.ru,suspicious,privacy-focused/suspicious domain
+E045,IP Address,120.26.206.252,benign,
+E046,IP Address,185.121.195.215,benign,
+E047,IP Address,82.235.53.95,benign,
+E048,IP Address,81.106.12.145,benign,
+E049,IP Address,222.57.190.38,benign,
+E050,URL,http://aopshff.com/ogoyit,benign,
+E051,URL,http://mstltjd.com/oexzyn,benign,
+E052,URL,http://vbvbadq.com/bdflbq,benign,

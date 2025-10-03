@@ -1,6 +1,41 @@
-MessageID,SenderNumber,ReceiverNumber,App,Timestamp,MessageText
-1,+1234567890,+1987654321,WhatsApp,2024-01-15 10:30:00,"Hey, are we still meeting for lunch tomorrow?"
-2,+971501234567,+1234567890,Telegram,2024-01-15 14:15:00,Payment received. Send 0.5 BTC to: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
-3,+1234567890,+971509876543,Signal,2024-01-15 22:30:00,Transaction confirmed. New address: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
-4,+1987654321,+1234567890,WhatsApp,2024-01-16 09:45:00,Thanks for the coffee! Let's do it again soon.
-5,+1555123456,+1234567890,WhatsApp,2024-01-16 16:20:00,Can you send me the project files when you get a chance?
+MessageID,ChatID,SenderNumber,ReceiverNumber,App,Timestamp,MessageText,Suspicious,Notes
+M0001,CH020,+914316117240,+911559407816,WhatsApp,2025-02-17 09:09,Meeting at the café tonight.,False,
+M0002,CH001,+10470952145,+918267586926,Telegram,2024-01-14 07:33,Happy birthday!,False,
+M0003,CH006,+916566701065,+916048175496,WhatsApp,2024-07-06 03:59,Discuss on dark web channels for delivery.,True,dark web keyword
+M0004,CH009,+917498941343,+971680715451,WhatsApp,2024-10-16 18:11,Happy birthday!,False,
+M0005,CH019,+919367632016,+971468044369,Telegram,2025-06-15 07:27,Meeting at the café tonight.,False,
+M0006,CH021,+913276483503,+917974034471|+918267586926|+914316117240,WhatsApp,2025-05-09 13:50,"Initiate transfer of INR 1000 via bank, confirm.",True,mention transfer
+M0007,CH016,+79324808613,+918313678377,SMS,2025-10-28 09:32,Let's sync next week about the project.,False,
+M0008,CH002,+971468044369,+912681177589,Telegram,2024-07-29 13:34,Send 0.75 BTC to 3VB5INM1MjeBsrdFtCdZe11MFCIX3BYOtDj ASAP,True,contains BTC address
+M0009,CH022,+915466889373,+912681177589,SMS,2024-01-26 13:20,Contact at 85e4e9oe94@protonmail.com for encrypted details.,True,suspicious email domain
+M0010,CH007,+912681177589,+919065940139,WhatsApp,2024-08-20 10:55,"Initiate transfer of INR 12000 via bank, confirm.",True,mention transfer
+M0011,CH022,+916048175496,+919399091699,SMS,2025-07-16 11:23,Contact at 85e4e9oe94@protonmail.com for encrypted details.,True,suspicious email domain
+M0012,CH004,+79324808613,+912880957015,Telegram,2025-04-15 01:09,Let's sync next week about the project.,False,
+M0013,CH013,+915726284987,+18404499727|+918692221969|+971468044369,Telegram,2025-03-05 13:22,Happy birthday!,False,
+M0014,CH006,+912681177589,+915787133150,SMS,2024-08-17 10:16,Meeting at the café tonight.,False,
+M0015,CH003,+915466889373,+915135427849,SMS,2024-10-29 15:04,Meeting at the café tonight.,False,
+M0016,CH003,+971043321819,+919517187026,Telegram,2025-08-14 08:31,Can you send the report?,False,
+M0017,CH003,+446923226025,+915329318393,SMS,2025-02-02 00:35,Meeting at the café tonight.,False,
+M0018,CH003,+917498941343,+911161528098,SMS,2025-09-01 06:59,Happy birthday!,False,
+M0019,CH001,+916464170805,+915787133150,SMS,2025-11-30 22:23,Can you send the report?,False,
+M0020,CH019,+10470952145,+917974034471,WhatsApp,2024-04-17 20:09,"On my way, be there in 20.",False,
+M0021,CH016,+915135427849,+915466889373|+971680715451|+442419049663,Telegram,2025-08-30 21:57,Contact at 5ibpt11f9i@safe-mail.net for encrypted details.,True,suspicious email domain
+M0022,CH024,+918692221969,+971685014294,Telegram,2024-03-24 02:06,Send 0.75 BTC to 12MLjlQM3ScwS8LUWoo7W4mQJBVWFzk ASAP,True,contains BTC address
+M0023,CH013,+918313678377,+919065940139,Telegram,2024-12-07 22:21,Let's sync next week about the project.,False,
+M0024,CH005,+442419049663,+971685014294,Telegram,2024-09-01 00:48,Call +971468044369 and confirm the drop.,True,mentions foreign number
+M0025,CH010,+918692221969,+919367632016,Telegram,2024-10-19 02:10,Happy birthday!,False,
+M0026,CH012,+917360260647,+971816934060,SMS,2025-02-27 19:15,Discuss on dark web channels for delivery.,True,dark web keyword
+M0027,CH001,+919517187026,+971816934060,Telegram,2025-09-11 13:56,Meeting at the café tonight.,False,
+M0028,CH014,+918692221969,+442419049663,WhatsApp,2024-07-15 06:19,Happy birthday!,False,
+M0029,CH013,+912880957015,+911161528098,Telegram,2025-03-28 05:48,Let's sync next week about the project.,False,
+M0030,CH023,+971680715451,+910229413186,SMS,2025-11-26 13:21,Let's sync next week about the project.,False,
+M0031,CH021,+915787133150,+917498941343|+971400524278,SMS,2025-04-20 21:08,Call +971468044369 and confirm the drop.,True,mentions foreign number
+M0032,CH014,+916566701065,+971468044369|+919594406409|+10470952145,SMS,2025-03-26 21:38,Can you send the report?,False,
+M0033,CH015,+910229413186,+919856984789,SMS,2025-01-23 17:21,Send 0.75 BTC to 3PcyLasnipuaUkxRFZXe1cb51JJRzhbuXM ASAP,True,contains BTC address
+M0034,CH016,+916566701065,+915787133150,WhatsApp,2025-10-07 16:53,Can you send the report?,False,
+M0035,CH012,+442419049663,+971816934060,SMS,2025-01-10 02:23,Meeting at the café tonight.,False,
+M0036,CH015,+18404499727,+442419049663,WhatsApp,2025-09-21 06:57,Meeting at the café tonight.,False,
+M0037,CH011,+916566701065,+446923226025,SMS,2024-07-08 10:52,Let's sync next week about the project.,False,
+M0038,CH006,+918313678377,+914316117240,WhatsApp,2025-09-11 15:14,Can you send the report?,False,
+M0039,CH006,+79324808613,+971685014294,Telegram,2025-04-04 23:28,Meeting at the café tonight.,False,
+M0040,CH023,+971816934060,+912880957015,SMS,2024-03-20 00:47,Let's sync next week about the project.,False,

@@ -1,0 +1,26 @@
+QueryID,QueryText,QueryType,Priority
+Q001,Show all chats with UAE (+971) numbers.,Chats,Medium
+Q002,Find messages that mention Bitcoin addresses.,Entities,Low
+Q003,List missed calls longer than 0 seconds in March 2025.,Calls,Low
+Q004,Show contacts with protonmail.com or .ru emails.,Contacts,Medium
+Q005,Find all long calls over 10 minutes.,Calls,Medium
+Q006,Which chats contain the word transfer or dark web?,Chats,Medium
+Q007,Cross-reference calls and chats for contacts named CryptoTrader.,Chats,Low
+Q008,List all Ethereum addresses seen in entities.,Entities,Low
+Q009,Show messages between 2024-12-01 and 2025-01-31 mentioning BTC.,Combined,Low
+Q010,"Find calls involving foreign numbers (+44, +971).",Calls,Medium
+Q011,Show all messages in group chats.,Chats,Low
+Q012,Which contacts are marked suspicious and have >1 call?,Calls,High
+Q013,List URLs from Entities that look suspicious.,Entities,Low
+Q014,Find any chats with email addresses in the text.,Chats,Low
+Q015,Show calls with duration over 1 hour.,Calls,Low
+Q016,List all chats where ReceiverNumber includes multiple participants.,Chats,Low
+Q017,Find entities that are Bitcoin addresses and appear in messages.,Entities,High
+Q018,Show all contacts linked to WhatsApp only.,Contacts,Medium
+Q019,Which phone numbers appear both in calls and chats?,Chats,Medium
+Q020,Find messages sent after 2025-06-01 mentioning transfer.,Combined,Low
+Q021,Show suspicious entities and their labels.,Entities,Medium
+Q022,List chats for contact +971501234567.,Chats,High
+Q023,Find queries for review flagged as high priority.,Combined,Low
+Q024,Find contacts whose name contains 'Trader' or 'Crypto'.,Contacts,Medium
+Q025,Show all calls in January 2025.,Calls,Low
