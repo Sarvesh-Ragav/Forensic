@@ -1,0 +1,20 @@
+"
+UFDR Synthetic Dataset
+Generation rules:
+- Random seed: 42
+- Files: Excel workbook UFDR_Dataset.xlsx with sheets: README, Chats, Calls, Contacts, Entities, Queries, Validation
+- Also exported as UTF-8 CSVs: Chats.csv, Calls.csv, Contacts.csv, Entities.csv, Queries.csv (in /mnt/data)
+- Phone format: international e.g. +91XXXXXXXXXX, +971XXXXXXX, +44XXXXXXXXXX, +1XXXXXXXXXX
+- Timestamp format: ISO 8601 'YYYY-MM-DD HH:MM' (24-hour)
+- All data synthetic and reproducible with seed above.
+- Suspicious rows are marked with Suspicious = TRUE/FALSE (or Label = suspicious/benign for Entities).
+Contact: Jeevan <jeevan@example.placeholder>
+Roadmap checklist:
+- Chats: Done
+- Calls: Done
+- Contacts: Done
+- Entities: Done
+- Queries: Done
+- Review: Done
+- Delivery: Done
+"
