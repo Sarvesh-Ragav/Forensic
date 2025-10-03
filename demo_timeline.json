@@ -1,0 +1,139 @@
+[
+  {
+    "event_id": "calls_C0009",
+    "event_type": "call",
+    "timestamp": "2024-01-26T09:28:00",
+    "dataset": "calls",
+    "data": {
+      "dataset": "calls",
+      "id": "C0009",
+      "CallID": "C0009",
+      "CallerNumber": "+971468044369",
+      "CalleeNumber": "+442419049663",
+      "Timestamp": "2024-01-26 09:28",
+      "DurationSeconds": 116,
+      "Type": "Incoming",
+      "Suspicious": true,
+      "Notes": "Foreign or suspicious contact",
+      "suspicion_score": 75
+    },
+    "linked_entities": [
+      {
+        "type": "foreign_number",
+        "value": "+971468044369",
+        "confidence": 1.0
+      },
+      {
+        "type": "foreign_number",
+        "value": "+442419049663",
+        "confidence": 1.0
+      }
+    ],
+    "cross_linked": false,
+    "suspicion_score": 75
+  },
+  {
+    "event_id": "messages_M0009",
+    "event_type": "message",
+    "timestamp": "2024-01-26T13:20:00",
+    "dataset": "messages",
+    "data": {
+      "dataset": "messages",
+      "id": "M0009",
+      "MessageID": "M0009",
+      "SenderNumber": "+915466889373",
+      "ReceiverNumber": "+912681177589",
+      "App": "SMS",
+      "Timestamp": "2024-01-26 13:20",
+      "MessageText": "Contact at 85e4e9oe94@protonmail.com for encrypted details.",
+      "Suspicious": true,
+      "Notes": "suspicious email domain",
+      "suspicion_score": 80
+    },
+    "linked_entities": [],
+    "cross_linked": false,
+    "suspicion_score": 80
+  },
+  {
+    "event_id": "calls_C0010",
+    "event_type": "call",
+    "timestamp": "2024-01-26T14:30:00",
+    "dataset": "calls",
+    "data": {
+      "dataset": "calls",
+      "id": "C0010",
+      "CallID": "C0010",
+      "CallerNumber": "+911559407816",
+      "CalleeNumber": "+919876543210",
+      "Timestamp": "2024-01-26 14:30",
+      "DurationSeconds": 300,
+      "Type": "Outgoing",
+      "Suspicious": false,
+      "Notes": "",
+      "suspicion_score": 20
+    },
+    "linked_entities": [],
+    "cross_linked": false,
+    "suspicion_score": 20
+  },
+  {
+    "event_id": "messages_M0008",
+    "event_type": "message",
+    "timestamp": "2024-07-29T13:34:00",
+    "dataset": "messages",
+    "data": {
+      "dataset": "messages",
+      "id": "M0008",
+      "MessageID": "M0008",
+      "SenderNumber": "+971468044369",
+      "ReceiverNumber": "+912681177589",
+      "App": "Telegram",
+      "Timestamp": "2024-07-29 13:34",
+      "MessageText": "Send 0.75 BTC to 3VB5INM1MjeBsrdFtCdZe11MFCIX3BYOtDj ASAP",
+      "Suspicious": true,
+      "Notes": "contains BTC address",
+      "suspicion_score": 85
+    },
+    "linked_entities": [
+      {
+        "type": "suspicious_keyword",
+        "value": "btc",
+        "confidence": 0.8
+      },
+      {
+        "type": "suspicious_keyword",
+        "value": "asap",
+        "confidence": 0.8
+      }
+    ],
+    "cross_linked": false,
+    "suspicion_score": 85
+  },
+  {
+    "event_id": "contacts_CT002",
+    "event_type": "contact",
+    "timestamp": "2025-10-03T12:17:41.784142",
+    "dataset": "contacts",
+    "data": {
+      "dataset": "contacts",
+      "id": "CT002",
+      "ContactID": "CT002",
+      "Name": "Hxjebruzw Whqjjfgy",
+      "PhoneNumber": "+911559407816",
+      "Email": "hxjebruzw@protonmail.com",
+      "App": "Telegram",
+      "Suspicious": true,
+      "Notes": "protonmail",
+      "suspicion_score": 90
+    },
+    "linked_entities": [
+      {
+        "type": "suspicious_email",
+        "value": "hxjebruzw@protonmail.com",
+        "confidence": 1.0
+      }
+    ],
+    "cross_linked": false,
+    "suspicion_score": 90
+  }
+]

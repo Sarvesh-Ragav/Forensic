@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "total_events": 2,
+    "event_types": {
+      "message": 1,
+      "call": 1
+    },
+    "cross_linked_events": 2,
+    "high_suspicion_events": 2,
+    "generated_at": "2025-10-03T12:16:59.490380"
+  },
+  "events": [
+    {
+      "id": "messages_1",
+      "event_type": "message",
+      "timestamp": "2024-01-15T10:30:00",
+      "dataset": "messages",
+      "original_data": {
+        "dataset": "messages",
+        "id": 1,
+        "sender": "+971468044369",
+        "receiver": "+919876543210",
+        "text": "Send 0.5 BTC to 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa ASAP",
+        "timestamp": "2024-01-15T10:30:00",
+        "app": "WhatsApp",
+        "suspicion_score": 100
+      },
+      "linked_entities": [],
+      "cross_linked": true,
+      "suspicion_score": 100,
+      "participants": [
+        "+971468044369",
+        "+919876543210"
+      ],
+      "summary": "Message from +971468044369 to +919876543210 via WhatsApp",
+      "cross_linked_participant": "+919876543210",
+      "cross_linked_count": 2
+    },
+    {
+      "id": "calls_2",
+      "event_type": "call",
+      "timestamp": "2024-01-15T11:00:00",
+      "dataset": "calls",
+      "original_data": {
+        "dataset": "calls",
+        "id": 2,
+        "caller": "+971468044369",
+        "callee": "+919876543210",
+        "duration": 1800,
+        "timestamp": "2024-01-15T11:00:00",
+        "type": "outgoing",
+        "suspicion_score": 92
+      },
+      "linked_entities": [],
+      "cross_linked": true,
+      "suspicion_score": 92,
+      "participants": [
+        "+971468044369",
+        "+919876543210"
+      ],
+      "summary": "Call from +971468044369 to +919876543210 (outgoing) - 30 min",
+      "cross_linked_participant": "+919876543210",
+      "cross_linked_count": 2
+    }
+  ]
+}
